@@ -10,9 +10,18 @@ services:
       - ~/.unpub-packages:/app/unpub-packages
     depends_on:
       - mongo
+    links:
+      - mongo
+    networks:
+      auth-network:
   mongo: 
     image: mongo:4.2.19
     container_name: unpub_mongo 
     restart: always
     volumes: 
       - ~/.unpub_mongo:/data/db
+    networks:
+      auth-network:
+networks:
+  auth-network:
+    driver: bridge
